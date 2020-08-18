@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:stock_chatroom/widgets/category_selector.dart';
+import 'package:stock_chatroom/widgets/favorite_contacts.dart';
+import 'package:stock_chatroom/widgets/recent_chats.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -9,16 +12,52 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.all_out),
+          icon: Icon(Icons.menu),
           iconSize: 30.0,
           color: Colors.white,
-          onPressed: () {
-            Navigator.pop(context);
-          },
+          onPressed: null,
         ),
-        title: Text('Home'),
+        title: Text(
+          'Chats',
+          style: TextStyle(
+            fontSize: 28.0,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        elevation: 0.0,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.search),
+            iconSize: 30.0,
+            color: Colors.white,
+            onPressed: null,
+          )
+        ],
+      ),
+      body: Column(
+        children: [
+          CategorySelector(),
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(
+                color: Theme.of(context).accentColor,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(30.0),
+                  topRight: Radius.circular(30.0),
+                ),
+              ),
+              child: Column(
+                children: [
+                  FavoriteContacts(),
+                  RecentChats(),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
